@@ -1,20 +1,32 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, EmailStr
 from uuid import UUID
 
 class User(BaseModel):
-    conig = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True)
     id: UUID | None = None
     name: str
-    email: str
+    email: EmailStr
     password: str
     phone: str
 
-class UserCreate(BaseModel):
+class UserOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: UUID
     name: str
-    email: str
+    email: EmailStr
+    phone: str
+
+class UserCreate(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    name: str
+    email: EmailStr
     password: str
     phone: str
 
 class UserLogin(BaseModel):
-    email: str
+    email: EmailStr
     password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"

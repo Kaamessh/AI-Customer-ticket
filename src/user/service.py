@@ -10,7 +10,7 @@ from fastapi import HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 from . import models
-from src.entities import User
+from src.entities.user import User
 
 ACCESS_TOKEN_EXPIRE_MINUTES = timedelta(weeks=2)
 JWT_ALGORITHM = 'HS256'
