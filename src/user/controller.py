@@ -9,7 +9,7 @@ from src.security import oauth2_scheme
 
 user_router = APIRouter(prefix="/users", tags=["users"])
 
-@user_router.get("/register", response_model=models.UserOut)
+@user_router.post("/register", response_model=models.UserOut)
 async def register_user(user: models.UserCreate, db: AsyncSession = Depends(get_db)):
     return await service.create_user(db, user)
 
