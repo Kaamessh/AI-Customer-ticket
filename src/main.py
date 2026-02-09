@@ -4,13 +4,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.api import initialize_endpoints
 from src.database.core import Base, engine
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    yield
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     async with engine.begin() as conn:
+#         await conn.run_sync(Base.metadata.create_all)
+#     yield
 
-app = FastAPI(title="AI Customer Ticket", lifespan=lifespan)
+app = FastAPI(title="AI Customer Ticket")
 
 app.add_middleware(
     CORSMiddleware,
