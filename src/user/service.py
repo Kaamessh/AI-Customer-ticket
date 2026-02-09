@@ -24,7 +24,7 @@ def check_password(hashed_pw: str, plain_pw: str) -> bool:
     return bcrypt_context.verify(plain_pw, hashed_pw)
 
 async def create_user(db: AsyncSession, user: models.UserCreate):
-    db_user = User(name=user.name, email=user.email, password=hash_password(user.password))
+    db_user = User(name=user.name, email=user.email, password=hash_password(user.password), phone=user.phone)
     db.add(db_user)
     await db.commit()
     await db.refresh(db_user)

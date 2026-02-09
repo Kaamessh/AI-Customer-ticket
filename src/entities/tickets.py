@@ -32,4 +32,4 @@ class Ticket(Base):
     user_id = Column(UUID, ForeignKey('user.id'), nullable=False)
     created_at = Column(TIMESTAMP, nullable=False, default=datetime.now)
 
-    user = relationship("User", back_populates="ticket")
+    user = relationship("User", back_populates="tickets")

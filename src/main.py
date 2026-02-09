@@ -1,13 +1,17 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from src.api import iniitialize_endpoints
-from src.database.core import Base, SessionLocal
-from dotenv import load_dotenv
+from src.api import initialize_endpoints
+from src.database.core import Base, engine
 
-load_dotenv()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
 
-app = FastAPI(title="AI Customer Ticket")
+app = FastAPI(title="AI Customer Ticket", lifespan=lifespan)
 
-iniitialize_endpoints(app)
+initialize_endpoints(app)
 
 @app.get("/")
 async def root():
