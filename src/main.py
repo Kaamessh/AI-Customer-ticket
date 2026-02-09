@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from src.api import iniitialize_endpoints
 from src.database.core import Base, SessionLocal
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI(title="AI Customer Ticket")
 
